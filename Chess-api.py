@@ -32,7 +32,7 @@ class Consulta():
     def show_board_unicode(self):
         print(self._board.unicode(borders=True))
 
-    def _special_move(self, move):
+    def _special_move(self, move):  #Only for scrapping pgn
         self._board.push_san(move)
 
     def make_move(self, move):
