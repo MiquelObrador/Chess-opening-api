@@ -126,9 +126,12 @@ class Consulta():
         self.show_board_unicode()
                   
     def computer_back(self):
-        self._board.pop()
-        self._board.pop()
-        self.show_board_unicode()
+        try:
+          self._board.pop()
+          self._board.pop()
+          self.show_board_unicode()
+        except:
+          print('You have not made a move yet.\n')
 
     def ini_variant(self):
         self._board_antiguo = self._board.copy()
