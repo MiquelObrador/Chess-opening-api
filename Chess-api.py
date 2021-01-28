@@ -124,6 +124,11 @@ class Consulta():
     def back(self):
         self._board.pop()
         self.show_board_unicode()
+                  
+    def computer_back(self):
+        self._board.pop()
+        self._board.pop()
+        self.show_board_unicode()
 
     def ini_variant(self):
         self._board_antiguo = self._board.copy()
@@ -263,6 +268,10 @@ if __name__ == '__main__':
                   print('Please, enter a number.\n')
 
             op_color = input('Which color do you want? Insert "white", "black" or "random". ')
+                  
+            while op_color not in ['white', 'black', 'random']:
+              print('Sorry, that is not a valid color.\n')
+              op_color = input('Which color do you want? Insert "white", "black" or "random". ')
 
             if op_color == 'random':
                 op_color = random.choice(['white', 'black'])
@@ -316,6 +325,11 @@ if __name__ == '__main__':
                         print()
 
                       mov = input('What move do you want to make?: ')
+                            
+                    elif mov == 'back':
+                      board.computer_back()
+                      mov = input('\nWhat move do you want to make?: ')
+                      print()
 
                     check_value = board.make_move(mov)
                     while check_value == "non-valid":
@@ -368,9 +382,7 @@ if __name__ == '__main__':
                     print()
 
                 for mov, porcentajes in movimientos.items():
-                    print(
-                        f'{mov}     {"{0:.3f}".format(porcentajes[0])} %    {"{0:.3f}".format(porcentajes[1])} %   {"{0:.3f}".format(porcentajes[2])} %'
-                    )
+                    print(f'{mov}     {"{0:.3f}".format(porcentajes[0])} %    {"{0:.3f}".format(porcentajes[1])} %   {"{0:.3f}".format(porcentajes[2])} %')
                     print()
 
                 mov = input('What move do you want to make?: ')
