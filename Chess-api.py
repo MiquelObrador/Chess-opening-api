@@ -21,9 +21,17 @@ def show_commands():
           'master            Change the analysis mode to master games.\n'
           'normal            Change the analysis mode to normal games.\n'
           'show [1-4]        Show the selected famous match.\n'
-          'help              See the commands again.\n'
           "insert fen        Insert you game's fen to contiunue from there.\n"
-          "opening variants  See the names of the possible variants of the game.\n"))
+          "opening variants  See the names of the possible variants of the game.\n"
+          'help              See the commands again.\n')
+    return None
+
+def show_commands_computer():
+    print('These are the available commands:\n'
+          'exit              Finish the game.\n'
+          'analysis          Show the recommended moves.\n'
+          'back              Undo your last move.\n'
+          'help              See the commamds again.\n')
     return None
 
 def ganador(string):
@@ -260,6 +268,7 @@ if __name__ == '__main__':
 
         mode = input('What do you want to do? Insert "computer", "analysis" or "exit". ')
         if mode == 'computer':
+            show_commands_computer()
             is_number = False
             while not is_number:
                 try:
@@ -300,6 +309,8 @@ if __name__ == '__main__':
                     mov = input('What move do you want to make?: ')
                     print()
 
+                    check_value = ''
+                  
                     if mov == 'exit':
                         break   
                         
@@ -334,14 +345,21 @@ if __name__ == '__main__':
                       mov = input('\nWhat move do you want to make?: ')
                       print()
 
-                    check_value = board.make_move(mov)
+                    elif mov == 'help':
+                      show_commands_computer()
+                      pass
+
+                    else:
+                      check_value = board.make_move(mov)
+                    
                     while check_value == "non-valid":
                         mov = input('What move do you want to make?: ')
                         print()
                         check_value = board.make_move(mov)
 
-                    op_turn = False
-                    bot_turn = True
+                    if check_value == None:
+                        op_turn = False
+                        bot_turn = True
 
                 end = board.result()
                 if end == 'win' or end == 'draw':
